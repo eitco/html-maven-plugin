@@ -1,0 +1,49 @@
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Cairo, sans-serif;
+}
+
+body {
+    font-family: Barlow, sans-serif;
+}
+
+table, th, td {
+    border: 1px solid black; border-spacing: 0;
+}
+
+code {
+    font-family: 'Courier New', monospace;
+}
+
+pre {
+    border: 1px solid #005cb9;
+    background-color: #f1f5f9;
+}
+
+.body {
+    float:left; padding-right: 40px;
+}
+
+.content {
+    overflow: hidden;
+}
+
+.title {
+    float:left;
+}
+
+.navbar-menu {
+    float:right;
+}
+
+.project-picker {
+    float:left;
+}
+
+.version-picker {
+    overflow: hidden;
+}
+
+.nav-text {
+    cursor: pointer;
+}
