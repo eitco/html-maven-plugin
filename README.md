@@ -58,6 +58,10 @@ To generate a zip containing your generated html files and resources us the `htm
 </project>
 ```
 
+Add your asciidoc file to `src/main/asciidoc`, your images and plain html files to `src/main/web-resources` and/or your 
+markdown files to `src/main/markdown`. 
+
+
  * A complete reference about the goals and parameters of this plugin can be found [here](https://eitco.github.io/html-maven-plugin/plugin-info.html).
  * The [integration tests](tree/main/src/it/) provide some examples about how to use this plugin
 
