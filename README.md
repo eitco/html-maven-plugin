@@ -63,6 +63,6 @@ markdown files to `src/main/markdown`.
 
 
  * A complete reference about the goals and parameters of this plugin can be found [here](https://eitco.github.io/html-maven-plugin/plugin-info.html).
- * The [integration tests](tree/main/src/it/) provide some examples about how to use this plugin
+ * The [integration tests](./src/it) provide some examples about how to use this plugin
 
 
