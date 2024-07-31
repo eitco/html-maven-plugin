@@ -17,7 +17,7 @@ To add this plugin to your build add the following to your pom:
 <build>
     <plugins>
         <plugin>
-            <groupId>de.eitco.cicd</groupId>
+            <groupId>de.eitco.cicd.html</groupId>
             <artifactId>html-maven-plugin</artifactId>
             <version>4.0.1</version>
             <extensions>true</extensions>
