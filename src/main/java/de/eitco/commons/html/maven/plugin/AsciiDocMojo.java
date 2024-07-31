@@ -23,15 +23,26 @@ import java.io.File;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+/**
+ * This goal generates html files from asciidoc source files. It is built on top of the
+ * {@code AsciidoctorMojo} from the <a href="https://github.com/asciidoctor/asciidoctor-maven-plugin">asciidoctor maven plugin</a>
+ * and adapts it to align with the defined build lifecycle.
+ */
 @Mojo(name = "from-asciidoc", defaultPhase = LifecyclePhase.COMPILE)
 public class AsciiDocMojo extends AsciidoctorMojo {
 
     @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
 
+    /**
+     * This parameter specifies where to put the generated html file(s).
+     */
     @Parameter(property = AsciidoctorMaven.PREFIX + "outputDirectory", defaultValue = AbstractHtmlGenerationMojo.DEFAULT_TARGET_DIRECTORY)
     protected File outputDirectory;
 
+    /**
+     * This parameter specifies whether to preserve the directory structure in the output.
+     */
     @Parameter(property = AsciidoctorMaven.PREFIX + "preserveDirectories", defaultValue = "true")
     protected boolean preserveDirectories = true;
 

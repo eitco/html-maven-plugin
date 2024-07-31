@@ -26,9 +26,15 @@ import java.io.*;
 import java.nio.file.Path;
 import java.util.Arrays;
 
+/**
+ * This goal generates html from markdown files.
+ */
 @Mojo(name = "from-markdown", defaultPhase = LifecyclePhase.COMPILE)
 public class MarkdownToHtmlMojo extends AbstractHtmlGenerationMojo {
 
+    /**
+     * This parameter specifies the directory where the markdown files are located.
+     */
     @Parameter(defaultValue = "${project.basedir}/src/main/markdown", property = "freemarker.target.directory")
     protected File markdownDirectory;
 

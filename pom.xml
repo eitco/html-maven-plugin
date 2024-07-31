@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -14,6 +15,10 @@
     <version>4.0.2-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
+    <description>
+        This maven plugin adds a build lifecycle to build and deploy html sites from asciidoc and markdown files.
+    </description>
+
     <developers>
         <developer>
             <name>Jan Schwarz</name>
@@ -25,8 +30,8 @@
         <url>https://github.com/eitco/html-maven-plugin.git</url>
         <connection>scm:git:https://github.com/eitco/html-maven-plugin.git</connection>
         <developerConnection>scm:git:https://github.com/eitco/html-maven-plugin.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <dependencies>
         <dependency>
@@ -67,6 +72,9 @@
         <plugins>
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <goals>deploy site site:stage scm-publish:publish-scm</goals>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -105,7 +113,8 @@
                             <goal>generate-metadata</goal>
                         </goals>
                         <configuration>
-                            <generatedMetadata>${build.directory}/components/from-annotations.xml</generatedMetadata>
+                            <generatedMetadata>${project.build.directory}/components/from-annotations.xml
+                            </generatedMetadata>
                         </configuration>
                     </execution>
                     <execution>
@@ -115,8 +124,9 @@
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>${build.directory}/components/from-annotations.xml</descriptor>
-                                <descriptor>${generated.base.main.source.directory}/components/components.xml</descriptor>
+                                <descriptor>${project.build.directory}/components/from-annotations.xml</descriptor>
+                                <descriptor>${generated.base.main.source.directory}/components/components.xml
+                                </descriptor>
                             </descriptors>
                         </configuration>
                     </execution>
@@ -124,5 +134,22 @@
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-report-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <distributionManagement>
+        <site>
+            <id>github</id>
+            <url>scm:git:https://github.com/eitco/eitco.github.io.git</url>
+        </site>
+    </distributionManagement>
 
 </project>

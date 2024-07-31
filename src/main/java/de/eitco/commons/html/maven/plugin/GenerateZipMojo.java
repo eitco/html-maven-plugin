@@ -26,15 +26,25 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+/**
+ * This goal zips the generated web page (html files and resources) in a zip file and attaches this zip file to
+ * the maven project, so that it will be installed and deployed by the maven default plugins.
+ */
 @Mojo(name = "zip-html", defaultPhase = LifecyclePhase.PACKAGE)
 public class GenerateZipMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
 
+    /**
+     * This parameter specifies the name of the zip file to generate.
+     */
     @Parameter(defaultValue = "${project.build.directory}/${project.artifactId}-${project.version}.zip")
     private File zipName;
 
+    /**
+     * This parameter specifies where to put the generated html file(s).
+     */
     @Parameter(property = AsciidoctorMaven.PREFIX + "outputDirectory", defaultValue = AbstractHtmlGenerationMojo.DEFAULT_TARGET_DIRECTORY)
     protected File outputDirectory;
 

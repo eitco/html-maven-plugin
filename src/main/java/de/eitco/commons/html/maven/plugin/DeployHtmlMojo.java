@@ -24,16 +24,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-
+/**
+ * This goal deploys the html files to a remote repository. It does use mavens wagon api to upload the
+ * generated html (and resource) files to a specified location. This is intended for quick and dirty
+ * - but up to date - documentation deployment - to a nexus 'raw' repository for example.
+ */
 @Mojo(name = "deploy-html", defaultPhase = LifecyclePhase.DEPLOY)
 public class DeployHtmlMojo extends AbstractSingleWagonMojo {
 
     @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
 
+    /**
+     * This parameter specifies where to put the generated html file(s).
+     */
     @Parameter(property = AsciidoctorMaven.PREFIX + "outputDirectory", defaultValue = AbstractHtmlGenerationMojo.DEFAULT_TARGET_DIRECTORY)
     protected File outputDirectory;
 
+    /**
+     * This parameter specified whether to skip the deployment of the html file(s).
+     */
     @Parameter(defaultValue = "false")
     protected boolean skipHtmlDeploy = false;
 

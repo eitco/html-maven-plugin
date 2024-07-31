@@ -19,15 +19,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This goal collects the web resources (images etc.) and adds them to the generated web page directory.
+ */
 @Mojo(name = "web-resources", defaultPhase = LifecyclePhase.PROCESS_RESOURCES)
-public class WebResourcesMojo extends AbstractHtmlGenerationMojo {
+public class WebResourcesMojo extends AbstractHtmlMojo {
 
+    /**
+     * This parameter specifies the directory where the resources are expected.
+     */
     @Parameter(defaultValue = "${project.basedir}/src/main/web-resources")
     protected File resourceDirectory;
 
+    /**
+     * This parameter specifies a list of regular expressions. Only file matching one of the expressions
+     * are collected. If this list is left empty, every file is considered to match.
+     */
     @Parameter
     protected List<String> includes = new ArrayList<>();
 
+    /**
+     * This parameter specifies a list of regular expressions. Only file matching none of the expressions
+     * are collected. If this list is left empty, no file is excluded.
+     */
     @Parameter
     protected List<String> excludes = new ArrayList<>();
 
