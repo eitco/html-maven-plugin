@@ -14,6 +14,7 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -28,11 +29,10 @@ import java.util.Arrays;
 @Mojo(name = "from-markdown", defaultPhase = LifecyclePhase.COMPILE)
 public class MarkdownToHtmlMojo extends AbstractHtmlGenerationMojo {
 
-    @Parameter(defaultValue = "${project.build.directory}/generated-sources/main/markdown", property = "freemarker.target.directory")
+    @Parameter(defaultValue = "${project.basedir}/src/main/markdown", property = "freemarker.target.directory")
     protected File markdownDirectory;
 
     public void convert(InputStream source, OutputStream target) throws IOException {
-
 
         MutableDataSet options = new MutableDataSet();
 
@@ -46,7 +46,7 @@ public class MarkdownToHtmlMojo extends AbstractHtmlGenerationMojo {
         Parser parser = Parser.builder(options).build();
         HtmlRenderer renderer = HtmlRenderer.builder(options).build();
 
-        String markdown = new String(IOUtil.toByteArray(source), sourceEncoding);
+        String markdown = new String(IOUtil.toByteArray(source), getSourceEncoding());
 
         Node document = parser.parse(markdown);
 
@@ -96,6 +96,8 @@ public class MarkdownToHtmlMojo extends AbstractHtmlGenerationMojo {
             String relativePath = rootDirectory.relativize(currentDirectory.toPath()).toString();
 
             File targetFile = new File(new File(outputDirectory, relativePath), changeExtension(file.getName(), "html"));
+
+            FileUtils.forceMkdir(targetFile.getParentFile());
 
             try (
                     InputStream source = new FileInputStream(file);

@@ -8,6 +8,7 @@
 package de.eitco.commons.html.maven.plugin;
 
 import com.google.common.base.Strings;
+import com.google.common.primitives.Chars;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
@@ -19,6 +20,7 @@ import org.codehaus.plexus.util.IOUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -123,9 +125,21 @@ public abstract class AbstractHtmlGenerationMojo extends AbstractMojo {
 
         html.append(HTML_FOOTER);
 
-        byte[] htmlBytes = html.toString().getBytes(sourceEncoding);
+        byte[] htmlBytes = html.toString().getBytes(getSourceEncoding());
 
         IOUtil.copy(htmlBytes, target);
+    }
+
+    private Charset sourcCharset = null;
+
+    protected Charset getSourceEncoding() {
+
+        if (sourcCharset != null) {
+
+            return sourcCharset;
+        }
+
+        return sourcCharset = Charset.forName(sourceEncoding != null ? sourceEncoding : "UTF-8");
     }
 
     private String loadDefaultStyle() throws IOException {
